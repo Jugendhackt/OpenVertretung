@@ -1,0 +1,2 @@
+[{"Lehrer":"Herr osca","Fach":"NT", "Art": "String", "Vertretungsplan": 1,  "StundeVon": 1,"StundeBis": 2, "Kommentar": "lol", "Raum": "33"},
+{"Lehrer":"Marco","Fach":"Informatik", "Art": "String", "Vertretungsplan": 2,  "StundeVon": 4,"StundeBis": 1, "Kommentar": "Krank", "Raum": "007"}]

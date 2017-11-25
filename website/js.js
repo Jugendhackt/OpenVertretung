@@ -1,9 +1,14 @@
 window.onload = function(){
-
-	Z = [
-	{"Lehrer":"Herr osca","Fach":"NT", "Art": "String", "Vertretungsplan": 1,  "StundeVon": 1,"StundeBis": 2, "Kommentar": "lol", "Raum": "33"},
-	{"Lehrer":"Marco","Fach":"Informatik", "Art": "String", "Vertretungsplan": 2,  "StundeVon": 4,"StundeBis": 1, "Kommentar": "Krank", "Raum": "007"}]
-	for(i=0;i<Z.length;i++){
+  // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
+  xmlhttp=new XMLHttpRequest();
+ 
+ xmlhttp.onreadystatechange=function()
+ {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  {
+   ude1 = xmlhttp.responseText;
+   Z = JSON.parse(ude1)
+   	for(i=0;i<Z.length;i++){
 		stunde = "?"
 		fach = "?"
 		raum = "?"
@@ -39,6 +44,15 @@ window.onload = function(){
 		
 		
 	}
+  }
+ }
+ xmlhttp.open("GET","/website/Ausfall.json",true);
+ xmlhttp.send();
+
+
+	
+
+	
 	
 	
 		

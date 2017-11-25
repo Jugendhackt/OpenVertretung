@@ -57,12 +57,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Vertretungsart` (
   `idVertretungsart` INT NOT NULL,
   `Name` VARCHAR(45) NULL,
-  PRIMARY KEY (`idVertretungsart`),
-  CONSTRAINT `fk_Zeile_Vertretungsart`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Vertretungsart` ()
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`idVertretungsart`))
 ENGINE = InnoDB;
 
 

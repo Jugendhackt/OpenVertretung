@@ -1,0 +1,81 @@
+h1 {
+  font-family: "Comic Sans MS";
+  text-align: center;
+  font-size: 50px;
+  color: #1100ff
+
+
+}
+
+#suchfeld{
+    text-align: center;
+	font-family: "Comic Sans MS";
+    font-size: 20px;
+    position: relative;
+    left: 36.5%;
+    top: 5%;
+    box-shadow: 0;
+    border-style: hidden;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+#btn-search{
+    box-shadow: 0;
+    border-style: hidden;
+	font-family: "Comic Sans MS";
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    font-size: 21px;
+    position: relative;
+    margin: 0;
+    left: 36.5%;
+    top: 5%;
+}
+
+.ueberschrift {
+	min-width: 30%
+	
+	
+}
+
+
+
+
+#kopf{
+  font-family: "Comic Sans MS";
+  background-color: #000000;
+  padding: 10px;
+  left: 0;
+  right: 0;
+  position: relative;
+  top: 0;
+}
+.logo{
+	width: 30%;
+	border-radius:25px;
+}
+
+footer {
+  position: fixed;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  background-color: #a1a1ee;
+}
+
+a:link, a:visited {
+    color: #000000;
+}
+
+a:active{
+    color: #FFFFFF;
+}
+
+a:hover{
+    color: #FF0000;
+    font-weight: bold;
+}
+
+

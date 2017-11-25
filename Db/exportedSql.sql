@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema Vertretungsplan
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema Vertretungsplan
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `Vertretungsplan` DEFAULT CHARACTER SET utf8 ;
+USE `Vertretungsplan` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vertretungsplan`
+-- Table `Vertretungsplan`.`Vertretungsplan`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vertretungsplan` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Vertretungsplan` (
   `idVertretungsplan` INT NOT NULL,
   `Schulname` VARCHAR(45) NULL,
   `Ort` VARCHAR(45) NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Lehrer`
+-- Table `Vertretungsplan`.`Lehrer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Lehrer` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Lehrer` (
   `idLehrer` INT NOT NULL,
   `Name` VARCHAR(45) NULL,
   PRIMARY KEY (`idLehrer`))
@@ -40,9 +40,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Kurs`
+-- Table `Vertretungsplan`.`Kurs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Kurs` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Kurs` (
   `idKurs` INT NOT NULL,
   `Name` VARCHAR(45) NULL,
   `Stufe` INT NULL,
@@ -52,9 +52,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vertretungsart`
+-- Table `Vertretungsplan`.`Vertretungsart`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vertretungsart` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Vertretungsart` (
   `idVertretungsart` INT NOT NULL,
   `Name` VARCHAR(45) NULL,
   PRIMARY KEY (`idVertretungsart`))
@@ -62,9 +62,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zeile`
+-- Table `Vertretungsplan`.`Zeile`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zeile` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Zeile` (
   `idZeile` INT NOT NULL,
   `Fach` VARCHAR(45) NULL,
   `Kurs` INT NULL,
@@ -80,31 +80,31 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Zeile` (
   INDEX `fk_Zeile_Vertretungsart_idx` (`Art` ASC),
   CONSTRAINT `fk_Vertretungsplan_Zeile`
     FOREIGN KEY (`Vertretungsplan`)
-    REFERENCES `mydb`.`Vertretungsplan` (`idVertretungsplan`)
+    REFERENCES `Vertretungsplan`.`Vertretungsplan` (`idVertretungsplan`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Zeile_Lehrer`
     FOREIGN KEY (`Lehrer`)
-    REFERENCES `mydb`.`Lehrer` (`idLehrer`)
+    REFERENCES `Vertretungsplan`.`Lehrer` (`idLehrer`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Zeile_Kurs`
     FOREIGN KEY (`Kurs`)
-    REFERENCES `mydb`.`Kurs` (`idKurs`)
+    REFERENCES `Vertretungsplan`.`Kurs` (`idKurs`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Zeile_Vertretungsart`
     FOREIGN KEY (`Art`)
-    REFERENCES `mydb`.`Vertretungsart` (`idVertretungsart`)
+    REFERENCES `Vertretungsplan`.`Vertretungsart` (`idVertretungsart`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zugangsart`
+-- Table `Vertretungsplan`.`Zugangsart`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zugangsart` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Zugangsart` (
   `idZugangsart` INT NOT NULL,
   `Name` VARCHAR(45) NULL,
   PRIMARY KEY (`idZugangsart`))
@@ -112,9 +112,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zugang`
+-- Table `Vertretungsplan`.`Zugang`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zugang` (
+CREATE TABLE IF NOT EXISTS `Vertretungsplan`.`Zugang` (
   `idZugang` INT NOT NULL,
   `Benutzername` VARCHAR(45) NULL,
   `Kennwort` VARCHAR(128) NULL,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Zugang` (
   INDEX `fk_Zugang_Zugangsart_idx` (`Zugangsart` ASC),
   CONSTRAINT `fk_Zugang_Zugangsart`
     FOREIGN KEY (`Zugangsart`)
-    REFERENCES `mydb`.`Zugangsart` (`idZugangsart`)
+    REFERENCES `Vertretungsplan`.`Zugangsart` (`idZugangsart`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -132,3 +132,5 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+ALTER TABLE `Zeile` ADD `Kommentar` TEXT NULL DEFAULT '' AFTER `StundeBis`; 

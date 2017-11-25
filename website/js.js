@@ -1,6 +1,12 @@
+window.onload = function(){
+    alert("Onload");
+    //your http post request goes here
+};
+
 function searchFunc(){
 	suchfeld = document.getElementById("suchfeld").value
 };
+
 document.getElementById("suchfeld")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -8,6 +14,3 @@ document.getElementById("suchfeld")
         document.getElementById("btn-search").click();
     }
 });
-
-window.onload(function(event){
-	alert(2);});

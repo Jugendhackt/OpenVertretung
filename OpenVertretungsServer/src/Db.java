@@ -47,17 +47,36 @@ public class Db
             int lehrerId = GetIdToLehrer(lehrer, vertretungsplan);
             int artId = GetIdToArt(art);
             int kursId = GetIdToKurs(kurs, vertretungsplan);
+            if (lehrerId == -1)
+                return "Invalid teacher";
+            if (artId == -1)
+                return "Invalid type";
+            if (kursId == -1)
+                return "Invalid course";
 
             ResultSet resultSet = null;
             try
             {
-                PreparedStatement statement = connect.prepareStatement("INSERT INTO Zeile ()")
-            }
-            catch (SQLException e)
+                PreparedStatement statement = connect.prepareStatement("INSERT INTO Zeile " +
+                        "(Lehrer, Fach, Art, Kurs, Vertretungsplan, StundeVon, StundeBis, " +
+                        "Kommentar, Raum, Datum) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); " +
+                        "SELECT LAST_INSERT_ID();");
+                statement.setInt(1, lehrerId);
+                statement.setString(2, fach);
+                statement.setInt(3, artId);
+                statement.setInt(4, kursId);
+                statement.setInt(5, vertretungsplan);
+                statement.setInt(6, stundeVon);
+                statement.setInt(7, stundeBis);
+                statement.setString(8, kommentar);
+                statement.setString(9, raum);
+                statement.setDate(10, date);
+            } catch (SQLException e)
             {
                 e.printStackTrace();
-            }
-            finally
+
+                return "Unknown error";
+            } finally
             {
                 if (resultSet != null)
                 {
@@ -67,10 +86,14 @@ public class Db
                     } catch (SQLException e)
                     {
                         e.printStackTrace();
+
+                        return "Unknown error";
                     }
                 }
             }
         }
+        return "Successful";
+    }
 
 
     private int GetIdToKurs (String kurs, int vertretungsplan)

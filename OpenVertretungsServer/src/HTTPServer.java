@@ -31,7 +31,7 @@ public class HTTPServer
                 case "POST":
                     JSONArray body = new JSONArray(t.getRequestBody());
                         if(body.get(0).toString() == "writeLines"){
-                            database.WriteZeile(body);
+                            database.WriteZeilen(body);
                         }
                     break;
                 case "GET":

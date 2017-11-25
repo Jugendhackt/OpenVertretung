@@ -198,7 +198,6 @@ public class Db
                     } catch (SQLException e)
                     {
                         e.printStackTrace();
-
                         return "Unknown error";
                     }
                 }

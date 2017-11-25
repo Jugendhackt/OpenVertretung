@@ -4,7 +4,6 @@ window.onload = function(){
 	{"Lehrer":"Herr osca","Fach":"NT", "Art": "String", "Vertretungsplan": 1,  "StundeVon": 1,"StundeBis": 2, "Kommentar": "lol", "Raum": "33"},
 	{"Lehrer":"Marco","Fach":"Informatik", "Art": "String", "Vertretungsplan": 2,  "StundeVon": 4,"StundeBis": 1, "Kommentar": "Krank", "Raum": "007"}]
 	for(i=0;i<Z.length;i++){
-		
 		stunde = "?"
 		fach = "?"
 		raum = "?"
@@ -35,7 +34,7 @@ window.onload = function(){
 		}
 		
 		zeilen = document.getElementById("olo")
-		zeilen.innerHTML = "	<tr><td>"+stunde+"</td><td>"+fach+"</td><td>"+raum+"</td><td>"+lehrer+"</td><td>"+besonderheiten+"</td></tr>";	
+		zeilen.innerHTML  += "	<tr><td>"+stunde+"</td><td>"+fach+"</td><td>"+raum+"</td><td>"+lehrer+"</td><td>"+besonderheiten+"</td></tr>";	
 			
 		
 		
@@ -54,13 +53,15 @@ window.onload = function(){
 				document.getElementById("btn-search").click();
 			}
 		});
-		zeilen = document.getElementById("olo")
-		zeilen.innerHTML = "	<tr><td>"+stunde+"</td><td>"+fach+"</td><td>"+raum+"</td><td>"+lehrer+"</td><td>"+besonderheiten+"</td></tr>";
-		//your http post request goes here
+
 };	
 
 function searchFunc(){
 	suchfeld = document.getElementById("suchfeld").value
-};
+	};
 
 
+function openschool(){
+	//openscho1	= document.getElementById("openschoo1").value
+	document.getElementById('tabelle').classList.toggle('collapsed');
+}

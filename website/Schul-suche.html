@@ -22,14 +22,14 @@
 			</tr>
 		</table>
 		<input type="text" name="suchfeld" id="suchfeld" placeholder="Schule">
-		<input type="button" id="btn-search" value="Los" onclick="searchFunc();"><br>
+		<input type="button" id="btn-search" value="Los" onclick="searchFunc();">
 </div>
 <table border="2" style="width:100%" class = "table1" > 
 	<tr> 
-		<td>IGS Erfurt</td>
+		<td onclick="openschool();">IGS Erfurt</td>
 	</tr>
 </table> 
-<table border="3" style="width:100%" class = "table" > 
+<table border="3" style="width:100%" class = "table collapsed" id="tabelle"> 
 	<thead>
 	<tr> 
 		<th class = "stunde">Stunde</th> 

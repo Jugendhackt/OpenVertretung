@@ -1,0 +1,14 @@
+<h1>Teacher Interface</h1>
+<h2>Please insert latest substitute and cancellation information into the field</h2>
+
+<form enctype='application/json' action="/request" method="post">
+  <ul>
+    <li><input type="text" placeholder="Abwesend" name="abwesenderLehrer"</li>
+    <li><input type="text" placeholder="Kurs" name="Kurs"</li>
+    <li><input type="number" min=1 max=15 step=1 placeholder="erste zu vertretende Stunde" name="stundeVon"</li>
+    <li><input type="number" min=1 max=15 step=1 placeholder="letzte zu vertretende Stunde" name="stundeBis"</li>
+    <li><input type="text" placeholder="Ersatzlehrer" name="ErsatzLehrer"</li>
+    <li><input type="text" placeholder="Heute" name="Datum"</li>
+  </ul>
+  <input type="submit" value="Übernehmen">
+</form>

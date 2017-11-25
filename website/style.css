@@ -1,5 +1,5 @@
 h1 {
-  font-family: "Comic Sans MS";
+  font-family: "Comic sans ms";
   text-align: center;
   font-size: 50px;
   color: #1100ff
@@ -9,10 +9,10 @@ h1 {
 
 #suchfeld{
     text-align: center;
-	font-family: "Comic Sans MS";
+	font-family: "Comic sans ms";
     font-size: 20px;
     position: relative;
-    left: 36.5%;
+    left: 37.5%;
     top: 5%;
     box-shadow: 0;
     border-style: hidden;
@@ -23,14 +23,14 @@ h1 {
 #btn-search{
     box-shadow: 0;
     border-style: hidden;
-	font-family: "Comic Sans MS";
+	font-family: "Comic sans ms";
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     text-align: center;
     font-size: 21px;
     position: relative;
     margin: 0;
-    left: 36.5%;
+    left: 37.5%;
     top: 5%;
 }
 
@@ -44,7 +44,7 @@ h1 {
 
 
 #kopf{
-  font-family: "Comic Sans MS";
+  font-family: "Comic sans ms";
   background-color: #000000;
   padding: 10px;
   left: 0;
@@ -76,6 +76,42 @@ a:active{
 a:hover{
     color: #FF0000;
     font-weight: bold;
+}
+
+
+
+.table1{
+	font-family: "Comic sans ms";
+	
+	
+}
+
+ .table th, .table td {
+	border:none;
+    border-bottom: 1px solid #ddd;
+	font-family: "Comic sans ms";
+		
+} 
+.table tr:hover {background-color: #f5f5f5;}
+
+.table th.stunde{
+	width:5%;	
+	
+}
+
+.table th.fach{
+	width:5%;	
+	
+}
+
+.table th.lehrer{
+	width:10%;	
+	
+}
+
+.table th.besonderheiten{
+	width:80%;	
+	
 }
 
 

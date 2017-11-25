@@ -3,8 +3,9 @@
 	<head>
 		<title>Open_Vertretung_Schul-suche</title>
 	     <link rel=stylesheet type=text/css href="style.css">
+		 <script src="js.js"></script>
 	</head>
-<body>
+<body script = "onload()">
 	<div id="kopf">
 		<table border="0" style="width:100%">
 			<tr>
@@ -19,10 +20,8 @@
 				</td>
 			</tr>
 		</table>
-	<form>
 		<input type="text" name="suchfeld" id="suchfeld" placeholder="Schule">
 		<input type="button" id="btn-search" value="Los" onclick="searchFunc();"><br>
-	</form>
 </div>
 <table border="2" style="width:100%" class = "table1" > 
 	<tr> 
@@ -33,6 +32,7 @@
 	<tr> 
 		<th class = "stunde">Stunde</th> 
 		<th class = "fach">Fach</th>
+		<th class = "raum">Raum</th>
 		<th class = "lehrer">Lehrer</th>
 		<th class = "besonderheiten">Besonderheiten</th>
 	</tr>
@@ -41,10 +41,17 @@
 		<td>...</td>
 		<td>...</td>
 		<td>...</td>
+		<td>...</td>
 	</tr>
 
 </table>
 
+  <footer style="position: fixed; bottom: 0; text-align: center; font-size: 20px;">
+    <a href="https://github.com/Jugendhackt/OpenVertretung">Github</a>
+    <a href="https://hackdash.org/projects/5a19543c87d0970a0e0a4070">Hackdash</a>
+	<a href="Anmeldung.html">Anmelden</a>
+  </footer>
+  </body>
 
 
 

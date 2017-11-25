@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OpenVertretungHTTPServer.iml" filepath="$PROJECT_DIR$/OpenVertretungHTTPServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenVertretung.iml" filepath="$PROJECT_DIR$/OpenVertretung.iml" />
     </modules>
   </component>
 </project>

@@ -1,13 +1,15 @@
+import com.sun.corba.se.spi.copyobject.CopyobjectDefaults;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Db
 {
     private Connection connect = null;
-    private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
 
 
     public Db()
@@ -16,136 +18,160 @@ public class Db
         {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost:port/dbname");
+                    .getConnection("jdbc:mysql://localhost:3306/Vertretungsplan");
         } catch (Exception e)
         {
             e.printStackTrace();
         }
     }
 
-    public String WriteZeile(JSONObject[] jsonObjects)
+    public String WriteZeile(JSONArray jsonObjects) throws ParseException
     {
-        for (JSONObject jsonObject : jsonObjects)
+        for (Object jsonObjectO : jsonObjects.getJSONArray(0).toList())
         {
+            JSONObject jsonObject = (JSONObject) jsonObjectO;
+
             String lehrer = jsonObject.getString("Lehrer");
             String fach = jsonObject.getString("Fach");
             String art = jsonObject.getString("Art");
             String kurs = jsonObject.getString("Kurs");
-            String vertretungsplan = jsonObject.getString("Vertretungsplan");
+            int vertretungsplan = jsonObject.getInt("Vertretungsplan");
             int stundeVon = jsonObject.getInt("StundeVon");
             int stundeBis = jsonObject.getInt("StundeBis");
             String kommentar = jsonObject.getString("Kommentar");
             String raum = jsonObject.getString("Raum");
-            String date = jsonObject.getString("Datum");
-        }
-    }
+            String datum = jsonObject.getString("Datum");
+            Date date = new java.sql.Date(new SimpleDateFormat("dd MMM yyyy").parse("01 " +
+                    "NOVEMBER 2012").getTime());
 
-    public void readDataBase() throws Exception
+            int lehrerId = GetIdToLehrer(lehrer, vertretungsplan);
+            int artId = GetIdToArt(art);
+            int kursId = GetIdToKurs(kurs, vertretungsplan);
+
+            ResultSet resultSet = null;
+            try
+            {
+                PreparedStatement statement = connect.prepareStatement("INSERT INTO Zeile ()")
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                if (resultSet != null)
+                {
+                    try
+                    {
+                        resultSet.close();
+                    } catch (SQLException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+
+    private int GetIdToKurs (String kurs, int vertretungsplan)
     {
+        ResultSet resultSet = null;
+
         try
         {
-            // This will load the MySQL driver, each DB has its own driver
-            // Setup the connection with the DB
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/feedback?"
-                            + "user=sqluser&password=sqluserpw");
-
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
-            // Result set get the result of the SQL query
-            resultSet = statement
-                    .executeQuery("select * from feedback.comments");
-            writeResultSet(resultSet);
-
-            // PreparedStatements can use variables and are more efficient
-            preparedStatement = connect
-                    .prepareStatement("insert into  feedback.comments values (default, ?, ?, ?, ? , ?, ?)");
-            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
-            // Parameters start with 1
-            preparedStatement.setString(1, "Test");
-            preparedStatement.setString(2, "TestEmail");
-            preparedStatement.setString(3, "TestWebpage");
-            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
-            preparedStatement.setString(5, "TestSummary");
-            preparedStatement.setString(6, "TestComment");
-            preparedStatement.executeUpdate();
-
-            preparedStatement = connect
-                    .prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from feedback.comments");
-            resultSet = preparedStatement.executeQuery();
-            writeResultSet(resultSet);
-
-            // Remove again the insert comment
-            preparedStatement = connect
-                    .prepareStatement("delete from feedback.comments where myuser= ? ; ");
-            preparedStatement.setString(1, "Test");
-            preparedStatement.executeUpdate();
-
-            resultSet = statement
-                    .executeQuery("select * from feedback.comments");
-            writeMetaData(resultSet);
-
-        } catch (Exception e)
+            PreparedStatement statement = connect.prepareStatement("SELECT idKurs FROM Kurs WHERE " +
+                    "Name = ? AND Vertretungsplan = ?");
+            statement.setString(1, kurs);
+            statement.setInt(2, vertretungsplan);
+            resultSet = statement.executeQuery();
+            return resultSet.getInt("idKurs");
+        } catch (SQLException e)
         {
-            throw e;
-        } finally
-        {
-            close();
+            e.printStackTrace();
+            return -1;
         }
-
+        finally
+        {
+            if (resultSet != null)
+            {
+                try
+                {
+                    resultSet.close();
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    private void writeMetaData(ResultSet resultSet) throws SQLException
+    private int GetIdToArt (String art)
     {
-        //  Now get some metadata from the database
-        // Result set get the result of the SQL query
+        ResultSet resultSet = null;
 
-        System.out.println("The columns in the table are: ");
-
-        System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
-        for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++)
+        try
         {
-            System.out.println("Column " + i + " " + resultSet.getMetaData().getColumnName(i));
+            PreparedStatement statement = connect.prepareStatement("SELECT idVertretungsart FROM " +
+                    "Vertretungsart WHERE \"Name\" = ?");
+            statement.setString(1, art);
+            resultSet = statement.executeQuery();
+            return resultSet.getInt("idVertretungsArt");
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+        finally
+        {
+            if (resultSet != null)
+            {
+                try
+                {
+                    resultSet.close();
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    private void writeResultSet(ResultSet resultSet) throws SQLException
+    private int GetIdToLehrer (String lehrerName, int vertretungsplan)
     {
-        // ResultSet is initially before the first data set
-        while (resultSet.next())
+        ResultSet resultSet = null;
+
+        try
         {
-            // It is possible to get the columns via name
-            // also possible to get the columns via the column number
-            // which starts at 1
-            // e.g. resultSet.getSTring(2);
-            String user = resultSet.getString("myuser");
-            String website = resultSet.getString("webpage");
-            String summary = resultSet.getString("summary");
-            Date date = resultSet.getDate("datum");
-            String comment = resultSet.getString("comments");
-            System.out.println("User: " + user);
-            System.out.println("Website: " + website);
-            System.out.println("summary: " + summary);
-            System.out.println("Date: " + date);
-            System.out.println("Comment: " + comment);
+            PreparedStatement statement = connect.prepareStatement("SELECT idLehrer FROM Lehrer " +
+                    "WHERE Vertretungsplan = ? AND \"Name\" = ?;");
+            statement.setInt(1, vertretungsplan);
+            statement.setString(2, lehrerName);
+            resultSet = statement.executeQuery();
+            return resultSet.getInt("idLehrer");
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+        finally
+        {
+            if (resultSet != null)
+            {
+                try
+                {
+                    resultSet.close();
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    // You need to close the resultSet
     private void close()
     {
         try
         {
-            if (resultSet != null)
-            {
-                resultSet.close();
-            }
-
-            if (statement != null)
-            {
-                statement.close();
-            }
-
             if (connect != null)
             {
                 connect.close();

@@ -135,7 +135,3 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 ALTER TABLE `Zeile` ADD `Kommentar` TEXT NULL DEFAULT '' AFTER `StundeBis`; ALTER TABLE `Zeile` ADD `Raum` TEXT NOT NULL AFTER `Kommentar`;
 ALTER TABLE `Zeile` ADD `Datum` DATE NOT NULL AFTER `Raum`; 
-ALTER TABLE `Lehrer` ADD `Vertretungsplan` INT NOT NULL;
-ALTER TABLE `Lehrer` ADD CONSTRAINT fk_Lehrer_Vertretungsplan FOREIGN KEY (Vertretungsplan) REFERENCES `Vertretungsplan`.`Vertretungsplan`(`idVertretungsplan`);
-ALTER TABLE `Kurs` ADD `Vertretungsplan` INT NOT NULL;
-ALTER TABLE `Kurs` ADD CONSTRAINT fk_Kurs_Vertretungsplan FOREIGN KEY (Vertretungsplan) REFERENCES `Vertretungsplan`.`Vertretungsplan`(`idVertretungsplan`);

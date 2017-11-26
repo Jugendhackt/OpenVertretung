@@ -44,7 +44,6 @@ function searchFunc(){
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
   {
    ude1 = xmlhttp.responseText;
-   alert(ude1)
    Z = JSON.parse(ude1);
    	for(i=0;i<Z.length;i++){
 		stunde = "?"
@@ -59,7 +58,7 @@ function searchFunc(){
 		fach = Z[i].Fach
 		raum = Z[i].Raum
 		lehrer = Z[i].Lehrer
-		besonderheiten = Z[i].Kommentar
+		besonderheiten = Z[i].Kommentar+","+Z[i].Art
 		stundeVon = Z[i].StundeVon
 		stundeBis = Z[i].StundeBis
 	
@@ -86,10 +85,11 @@ function searchFunc(){
  }
  //////////////////////////////////////////////////////
  /////////////////////////////////////////////////////
- ServerLink = "10.23.41.176:8001/test"
+ //ServerLink = "http://10.23.41.176:8001/test"
+ ServerLink = "./ausfall.json"
  //////////////////////////////////////////////////////
  /////////////////////////////////////////////////////
- xmlhttp.open("GET",ServerLink,true);
+ xmlhttp.open("POST",ServerLink,true);
  xmlhttp.send('["readVertretungsplan", {"Vertretungsplan":1,"Benutzername":"Blumentopf","Passwort":"42424242"}]');
 	};
 

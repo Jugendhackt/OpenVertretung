@@ -1,5 +1,40 @@
 window.onload = function(){
-  // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
+	
+	
+ 
+   //alert("Onload");
+		document.getElementById("suchfeld")
+		.addEventListener("keyup", function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById("btn-search").click();
+			}
+		});
+
+};	
+
+function searchFunc(){
+	suchfeld = document.getElementById("suchfeld").value
+	
+	document.getElementById("olo").innerHTML = ""
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
   xmlhttp=new XMLHttpRequest();
  
  xmlhttp.onreadystatechange=function()
@@ -7,7 +42,7 @@ window.onload = function(){
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
   {
    ude1 = xmlhttp.responseText;
-   Z = JSON.parse(ude1)
+   Z = JSON.parse(ude1);
    	for(i=0;i<Z.length;i++){
 		stunde = "?"
 		fach = "?"
@@ -46,32 +81,8 @@ window.onload = function(){
 	}
   }
  }
- xmlhttp.open("GET","/website/Ausfall.json",true);
+ xmlhttp.open("GET","./ausfall.json",true);
  xmlhttp.send();
-
-
-	
-
-	
-	
-	
-		
-		
-	
- 
-   //alert("Onload");
-		document.getElementById("suchfeld")
-		.addEventListener("keyup", function(event) {
-			event.preventDefault();
-			if (event.keyCode === 13) {
-				document.getElementById("btn-search").click();
-			}
-		});
-
-};	
-
-function searchFunc(){
-	suchfeld = document.getElementById("suchfeld").value
 	};
 
 

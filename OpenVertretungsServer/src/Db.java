@@ -131,6 +131,7 @@ public class Db
 
     public JSONArray ReadCounts (JSONObject jsonObject)
     {
+        //TODO
         return new JSONArray(){{put(new JSONObject(){{put("Zahl", 1);}});}};
     }
 

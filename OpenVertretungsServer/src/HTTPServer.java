@@ -114,7 +114,7 @@ public class HTTPServer
                     break;
                 case "GET":
                     System.out.println("Request GET body: " + body.get(0));
-                    if (Objects.equals(commandType, "ReadVertretungsplan"))
+                    if (Objects.equals(commandType, "readVertretungsplan"))
                     {
                         String r = database.Read(body.getJSONObject(0)).toString();
                         System.out.println("Request response: " + r);

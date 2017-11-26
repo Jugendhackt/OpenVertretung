@@ -38,9 +38,11 @@ public class HTTPServer
     {
         database = new Db();
 
-        Enumeration<InetAddress> adresses = NetworkInterface.getByName("wlp2s0").getInetAddresses();
+        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+        NetworkInterface nInterface = interfaces.nextElement();
+        Enumeration<InetAddress> adresses = nInterface != null ? nInterface.getInetAddresses() : null;
         InetAddress iAdress = null;
-        while (adresses.hasMoreElements())
+        while (adresses != null && adresses.hasMoreElements())
             iAdress = adresses.nextElement();
         String adress = iAdress != null ? iAdress.getHostAddress() : "";
         server = HttpServer.create(new InetSocketAddress(adress,

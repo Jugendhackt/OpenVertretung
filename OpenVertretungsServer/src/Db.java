@@ -129,6 +129,11 @@ public class Db
         }
     }
 
+    public JSONArray ReadCounts (JSONObject jsonObject)
+    {
+        return new JSONArray(){{put(new JSONObject(){{put("Zahl", 1);}});}};
+    }
+
     public String WriteZeilen(JSONArray jsonObjects)
     {
         for (int i = 0; i < jsonObjects.length(); i++)

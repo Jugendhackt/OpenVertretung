@@ -78,14 +78,13 @@ public class HTTPServer
 
 
             System.out.println("Initial body: " + body);
-
+            String commandType = body.getString(0);
+            body.remove(0);
 
             switch (t.getRequestMethod())
             {
                 case "POST":
                     System.out.println("Request POST body: " + body.getString(0));
-                    String commandType = body.getString(0);
-                    body.remove(0);
                     if (Objects.equals(commandType, "writeLines"))
                     {
                         System.out.println("Request POST body 2: " + body.get(0));
@@ -115,9 +114,17 @@ public class HTTPServer
                     break;
                 case "GET":
                     System.out.println("Request GET body: " + body.get(0));
-                    String r = database.Read(body.getJSONObject(0)).toString();
-                    System.out.println("Request response: " + r);
-                    sendResponse(200, r, t);
+                    if (Objects.equals(commandType, "ReadVertretungsplan"))
+                    {
+                        String r = database.Read(body.getJSONObject(0)).toString();
+                        System.out.println("Request response: " + r);
+                        sendResponse(200, r, t);
+                    }
+                    else if(Objects.equals(commandType, "readCounts"))
+                    {
+                        String r = database.ReadCounts(body.getJSONObject(0)).toString();
+                        sendResponse(200, r, t);
+                    }
 
                     break;
                 default:

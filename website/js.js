@@ -16,22 +16,23 @@ window.onload = function(){
 function searchFunc(){
 	suchfeld = document.getElementById("suchfeld").value
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	document.getElementById("olo").innerHTML = ""
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	 // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
@@ -39,9 +40,11 @@ function searchFunc(){
  
  xmlhttp.onreadystatechange=function()
  {
+	
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
   {
    ude1 = xmlhttp.responseText;
+   alert(ude1)
    Z = JSON.parse(ude1);
    	for(i=0;i<Z.length;i++){
 		stunde = "?"
@@ -81,8 +84,13 @@ function searchFunc(){
 	}
   }
  }
- xmlhttp.open("GET","./ausfall.json",true);
- xmlhttp.send();
+ //////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////
+ ServerLink = "10.23.41.176:8001/test"
+ //////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////
+ xmlhttp.open("GET",ServerLink,true);
+ xmlhttp.send('["readVertretungsplan", {"Vertretungsplan":1,"Benutzername":"Blumentopf","Passwort":"42424242"}]');
 	};
 
 

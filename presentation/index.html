@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Open Vertretung</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -29,12 +29,11 @@
 				</section>
 				<section>
                     <h2>Das Problem</h2>
-
-                        <p>∄ Vertretungspläne ⊻ sie sind sch***e</p>
+                        <p>∄ digitaler Vertretungsplan ⊻ er ist sch***e</p>
                         <p>v ∄ Statistiken zum Lehrerausfall.</p>
                 </section>
                 <section>
-                    <img src="drawing.svg">
+                    <img style="background: ghostwhite" src="./res/Komponenten.svg" alt="Overview">
                 </section>
 			</div>
 		</div>
@@ -47,6 +46,9 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+                progress:false,
+                history: true,
+                transition: 'concave',
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },

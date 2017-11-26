@@ -1,11 +1,16 @@
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import java.util.Objects;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -31,9 +36,14 @@ public class HTTPServer
 
     public static void start() throws Exception
     {
-        database = new Db();;
-        server = HttpServer.create(new InetSocketAddress(InetAddress.getByName
-                ("10.23.41.176"),
+        database = new Db();
+
+        Enumeration<InetAddress> adresses = NetworkInterface.getByName("wlp2s0").getInetAddresses();
+        InetAddress iAdress = null;
+        while (adresses.hasMoreElements())
+            iAdress = adresses.nextElement();
+        String adress = iAdress != null ? iAdress.getHostAddress() : "";
+        server = HttpServer.create(new InetSocketAddress(adress,
                 8001), 0);
 
         server.createContext("/test", new MyHandler());
@@ -121,10 +131,14 @@ public class HTTPServer
 
         private void sendResponse(int code, String content, HttpExchange t) throws IOException
         {
-            //content = content.substring(0, 10);
+            byte[] bytes = content.getBytes();
             t.sendResponseHeaders(code, content.length());
             OutputStream os = t.getResponseBody();
-            os.write(content.getBytes());
+            for (int i = 0; i < bytes.length / 10; i++)
+                os.write(bytes, 10 * i, 10);
+            int finalOff = (bytes.length / 10 - 1) * 10;
+            int finalLength = bytes.length % 10 - 1;
+            os.write(bytes, finalOff, finalLength);
             os.close();
         }
     }

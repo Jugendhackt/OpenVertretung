@@ -7,7 +7,7 @@ public class Main
     public static void main(String[] args)
     {
         Db db = new Db();
-        db.Test();
+        //db.Test();
         System.out.println("Hello World!");
         server = new HTTPServer();
         try

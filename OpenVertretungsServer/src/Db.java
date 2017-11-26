@@ -254,6 +254,11 @@ public class Db
         }
     }
 
+    public boolean WriteLehrer(JSONObject data)
+    {
+        return WriteLehrer(data.getString("Name"), data.getInt("Vertretungsplan"));
+    }
+
     private boolean WriteLehrer (String name, int vertretungsplan)
     {
         PreparedStatement statement = null;
@@ -264,7 +269,8 @@ public class Db
                     "VALUES (?, ?)");
             statement.setString(1, name);
             statement.setInt(2, vertretungsplan);
-            return statement.execute();
+            statement.execute();
+            return true;
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -275,6 +281,11 @@ public class Db
         }
     }
 
+    public boolean WriteArt (JSONObject data)
+    {
+        return WriteArt(data.getString("Name"));
+    }
+
     private boolean WriteArt(String name)
     {
         PreparedStatement statement = null;
@@ -283,7 +294,8 @@ public class Db
         {
             statement = connect.prepareStatement("INSERT INTO Vertretungsart (Name) VALUES (?)");
             statement.setString(1, name);
-            return statement.execute();
+            statement.execute();
+            return true;
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -292,6 +304,12 @@ public class Db
         {
             closeFinally(null, statement);
         }
+    }
+
+    public boolean WriteKurs (JSONObject data)
+    {
+        return WriteKurs(data.getString("Name"), data.getString("Stufe"), data.getString
+                ("Fach"), data.getInt("Vertretungsplan"));
     }
 
     private boolean WriteKurs (String name, String stufe, String fach, int vertretungsPlan)
